@@ -1,6 +1,6 @@
 # ASCHII
 Convert your Text to ASCII Art <br>
-`Currently ASCHII only supports Text.`
+`Currently ASCHII only supports Text to ASCII.`
 
 # Installation
 ```

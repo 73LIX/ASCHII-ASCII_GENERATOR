@@ -4,7 +4,7 @@ Convert your Text to ASCII Art <br>
 
 # Installation
 ```
-curl -sL  | bash
+curl -fsSL https://raw.githubusercontent.com/73LIX/ASCHII-ASCII_GENERATOR/main/aschii/install.sh | bash
 ```
 
 # Usage

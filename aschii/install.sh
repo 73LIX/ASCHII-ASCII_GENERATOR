@@ -6,13 +6,13 @@ INSTALL_DIR="$HOME/.local/bin"
 BIN_NAME="aschii"
 FILE_NAME="aschii.py"
 
-REPO_URL="${ASCHII_REPO_URL:-}"
+REPO_URL="${ASCHII_REPO_URL:-https://raw.githubusercontent.com/73LIX/ASCHII-ASCII_GENERATOR/main/aschii}"
 
 echo "Installing ASCHII..."
 
 mkdir -p "$INSTALL_DIR"
 
-curl -sL "$REPO_URL/$FILE_NAME" -o "$INSTALL_DIR/$FILE_NAME"
+curl -fsSL "$REPO_URL/$FILE_NAME" -o "$INSTALL_DIR/$FILE_NAME"
 
 chmod +x "$INSTALL_DIR/$FILE_NAME"
 
@@ -23,10 +23,17 @@ ln -s "$INSTALL_DIR/$FILE_NAME" "$INSTALL_DIR/$BIN_NAME"
 
 if ! echo "$PATH" | grep -q "$INSTALL_DIR"; then
     SHELL_RC=""
-    if [ -n "$ZSH_VERSION" ]; then
+    SHELL_NAME="$(basename "$SHELL")"
+    if [ "$SHELL_NAME" = "zsh" ]; then
         SHELL_RC="$HOME/.zshrc"
-    elif [ -n "$BASH_VERSION" ]; then
-        SHELL_RC="$HOME/.bashrc"
+    elif [ "$SHELL_NAME" = "bash" ]; then
+        if [ -f "$HOME/.bashrc" ]; then
+            SHELL_RC="$HOME/.bashrc"
+        else
+            SHELL_RC="$HOME/.bash_profile"
+        fi
+    else
+        SHELL_RC="$HOME/.profile"
     fi
     if [ -n "$SHELL_RC" ] && [ -f "$SHELL_RC" ]; then
         if ! grep -q "$INSTALL_DIR" "$SHELL_RC" 2>/dev/null; then

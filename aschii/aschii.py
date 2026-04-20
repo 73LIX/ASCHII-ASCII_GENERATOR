@@ -3,6 +3,8 @@ import argparse
 import sys
 import tty
 import termios
+import random
+import shutil
 import pyfiglet
 
 DEFAULT_FONT = "standard"
@@ -27,6 +29,25 @@ FONTS = sorted([
 ])
 
 
+def generate_header(text: str = "ASCHII") -> tuple:
+    random_font = random.choice(FONTS)
+    try:
+        art = pyfiglet.figlet_format(text, font=random_font)
+    except:
+        art = pyfiglet.figlet_format(text, font="standard")
+    
+    term_width = shutil.get_terminal_size().columns or 60
+    lines = art.split('\n')
+    centered_lines = []
+    for line in lines:
+        if line:
+            padding = (term_width - len(line)) // 2
+            centered_lines.append(' ' * max(0, padding) + line)
+        else:
+            centered_lines.append('')
+    return '\n'.join(centered_lines), random_font
+
+
 def run_cli_mode(text: str, font: str = DEFAULT_FONT) -> None:
     try:
         result = pyfiglet.figlet_format(text, font=font)
@@ -37,16 +58,17 @@ def run_cli_mode(text: str, font: str = DEFAULT_FONT) -> None:
 
 
 def run_tui_mode(font: str = DEFAULT_FONT) -> None:
-    print("\n" + "=" * 34)
-    print("  ASCHII - ASCII Art Generator")
-    print(f"  Font: {font}")
-    print("=" * 34)
-    print("\nType your text and press Enter to generate ASCII art")
-    print("Type 'quit' or 'exit' to stop\n")
+    header_art, header_font = generate_header()
+    print("\n")
+    print(header_art)
+    print(f"\nCurrent Font: {font}")
+    print("Type your text and press Enter to generate ASCII art")
+    print("Type 'quit' or 'exit' to stop")
+    print("Use \"aschii -f\" to use a different font\n")
 
     while True:
         try:
-            text = input("\n> ").strip()
+            text = input("> ").strip()
             if text.lower() in ('quit', 'exit', 'q'):
                 print("\n")
                 break

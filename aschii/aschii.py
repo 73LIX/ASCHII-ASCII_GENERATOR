@@ -15,7 +15,7 @@ HEADER_FONTS = [
 ]
 
 FONTS = sorted([
-    "standard", "3-d", "3x5", "5lineoblique", "acrobatic", "alligator", "alligator2", "alphabet", "amcrazor", "amcrazo2", "amcslash", "amcthin", "avatar", "arrows", "bear", "big", "block", "banner", "banner3", "banner3-D", "banner4", "barbwire", "basic", "bell",
+    "standard", "3-d", "3x5", "5lineoblique", "acrobatic", "alligator", "alligator2", "alphabet", "amcrazor", "amcrazo2", "amcslash", "amcthin", "avatar", "arrows", "bear", "big", "banner", "banner3", "banner3-D", "banner4", "barbwire", "basic", "bell",
     "bigascii12", "bigascii9", "bigchief", "bigmono12", "bigmono9", "binary", "block", "blocks",
     "blocky", "bubble", "bubble__", "bubble_b", "bulbhead", "calgphy2", "caligraphy", "catwalk", "chunky", "coinstak", "colossal",
     "computer", "contessa", "contrast", "cosmic", "cosmike", "cricket", "cursive", "cyberlarge",
@@ -68,15 +68,12 @@ def run_tui_mode(font: str = DEFAULT_FONT) -> None:
     print(header_art)
     print(f"\nCurrent Font: {font}")
     print("Type your text and press Enter to generate ASCII art")
-    print("Type 'quit' or 'exit' to stop")
-    print("Use \"aschii -f\" to use a different font\n")
+    print("Use \"aschii -f\" to use a different font")
+    print("Press ctrl+c (or ctrl+d) to exit\n")
 
     while True:
         try:
             text = input("> ").strip()
-            if text.lower() in ('quit', 'exit', 'q'):
-                print("\n")
-                break
             if text:
                 result = pyfiglet.figlet_format(text, font=font)
                 print(result)
@@ -105,7 +102,7 @@ def run_font_picker() -> str:
             stdscr.clear()
             stdscr.addstr(0, 0, "=" * 42, curses.A_BOLD)
             stdscr.addstr(1, 0, "  ASCHII - Font Selection")
-            stdscr.addstr(2, 0, "  https://www.figlet.org/examples.html", curses.A_UNDERLINE)
+            stdscr.addstr(2, 0, "  http://www.jave.de/figlet/fonts/overview.html", curses.A_UNDERLINE)
             stdscr.addstr(3, 0, "=" * 42)
             stdscr.addstr(4, 0, "  Use UP/DOWN to navigate, ENTER to select, ESC to cancel")
 
@@ -149,11 +146,7 @@ def run_font_picker() -> str:
 
 def run_font_selector_mode() -> None:
     selected_font = run_font_picker()
-    if selected_font:
-        print(f"\nSelected font: {selected_font}")
-    else:
-        print(f"\nUsing default font: {DEFAULT_FONT}")
-        selected_font = DEFAULT_FONT
+    selected_font = selected_font or DEFAULT_FONT
     run_tui_mode(font=selected_font)
 
 

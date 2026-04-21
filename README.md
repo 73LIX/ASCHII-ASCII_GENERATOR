@@ -1,10 +1,9 @@
 # ASCHII
 Convert your Text to ASCII Art <br>
-`Currently ASCHII only supports Text to ASCII.`
 
 # Installation
 ```
-curl -fsSL https://raw.githubusercontent.com/73LIX/ASCHII-ASCII_GENERATOR/main/aschii/install.sh | bash
+pip install aschii
 ```
 
 # Usage
@@ -12,7 +11,7 @@ curl -fsSL https://raw.githubusercontent.com/73LIX/ASCHII-ASCII_GENERATOR/main/a
 ```
 aschii
 ```
-2. CLI Mode (pass arguments)
+2. Switch fonts
 ```
-aschii -m "your_text"
+aschii -f
 ```

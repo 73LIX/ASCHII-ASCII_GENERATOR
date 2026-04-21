@@ -9,8 +9,15 @@ import pyfiglet
 
 DEFAULT_FONT = "standard"
 
+HEADER_FONTS = [
+    "standard", "alligator2", "bear", "block", "banner3", "banner4",
+    "bubble", "bulbhead", "chunky", "coinstak", "colossal", "crawford", "cricket", "cyberlarge", "digital", "doom", "drpepper", "dotmatrix", "epic", "fuzzy",
+    "ghost", "glenyn", "graceful", "graffiti", "keyboard", "lean", "lockergnome", "merlin1", "modular", "maxfour", "nipples", "pawp", "peaks", "poison", "rectangles", "red_phoenix", "rounded", "serifcap", "short", "shadow", "slant", "small", "soft", "speed", "stacey", "stforek",
+    "stop", "sub-zero", "tiles", "tinker-toy", "tombstone", "trek", "train", "tubular", "twisted", "usaflag"
+]
+
 FONTS = sorted([
-    "standard", "3-d", "3x5", "5lineoblique", "acrobatic", "alligator", "alligator2", "alphabet", "avatar", "big", "block", "banner", "banner3", "banner3-D", "banner4", "barbwire", "basic", "bell",
+    "standard", "3-d", "3x5", "5lineoblique", "acrobatic", "alligator", "alligator2", "alphabet", "amcrazor", "amcrazo2", "amcslash", "amcthin", "avatar", "arrows", "bear", "big", "block", "banner", "banner3", "banner3-D", "banner4", "barbwire", "basic", "bell",
     "bigascii12", "bigascii9", "bigchief", "bigmono12", "bigmono9", "binary", "block", "blocks",
     "blocky", "bubble", "bubble__", "bubble_b", "bulbhead", "calgphy2", "caligraphy", "catwalk", "chunky", "coinstak", "colossal",
     "computer", "contessa", "contrast", "cosmic", "cosmike", "cricket", "cursive", "cyberlarge",
@@ -30,7 +37,7 @@ FONTS = sorted([
 
 
 def generate_header(text: str = "ASCHII") -> tuple:
-    random_font = random.choice(FONTS)
+    random_font = random.choice(HEADER_FONTS)
     try:
         art = pyfiglet.figlet_format(text, font=random_font)
     except:

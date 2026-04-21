@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 import argparse
 import sys
-import tty
-import termios
 import random
 import shutil
 import pyfiglet
